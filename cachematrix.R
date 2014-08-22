@@ -1,5 +1,34 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Matrix inversion is usually a costly computation and there may be some benefit to caching the inverse 
+## of a matrix rather than computing it repeatedly
+## This is an example of how you would invoke the 2 functions listed below
+## > source("C:\\Learning\\R Programming AUG2014\\Programming Assignments\\ProgrammingAssignment2\\cachematrix.R")
+##
+## Create the test invertible matrix
+## > X <- matrix(c(1,2,3,4), nrow=2, ncol=2)
+##
+## Set up the vector
+## > mat <- makeCacheMatrix(X)
+##
+## Compute the inverse -- in the first run, the matrix inverse has to be calculated
+## > cacheSolve(mat)
+##     [,1] [,2]
+## [1,]   -2  1.5
+## [2,]    1 -0.5
+##
+## Execute a second time -- note message about getting cached result
+## > cacheSolve(mat)
+## getting cached matrix inverse
+##       [,1] [,2]
+##  [1,]   -2  1.5
+##  [2,]    1 -0.5
+##
+## Execute a third time -- again, pick up the cached result
+## > cacheSolve(mat)
+## getting cached matrix inverse
+##       [,1] [,2]
+##  [1,]   -2  1.5
+##  [2,]    1 -0.5
+
 
 ## This function creates a special "matrix" object that can cache its inverse.
 makeCacheMatrix <- function(x = matrix()) {
@@ -16,6 +45,10 @@ makeCacheMatrix <- function(x = matrix()) {
 	}
 	getInverse <- function() matrix
 	
+	list(set = set, get = get,
+             setInverse = setInverse,
+             getInverse = getInverse)
+			 
 }
 
 
